@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:28:26 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/03 15:21:46 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/03 16:42:00 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int	main(void)
 	void	*mlx_win;
 	t_data	img;
 
-	int x = 800;
-	int y = 600;
+	char *x = "Test";
+	(void)x;
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, 800, 600, "Hello world!");
 	img.img = mlx_new_image(mlx, 800, 600);
