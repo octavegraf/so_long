@@ -11,7 +11,6 @@
       "stopOnEntry": false,
       "preLaunchTask": "build",
       "linux": true
-      
     }
   ]
 }
