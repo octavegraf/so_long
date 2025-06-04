@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:28:26 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/03 16:42:00 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/04 17:24:32 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,23 @@ typedef struct	s_data {
 	int		endian;
 }				t_data;
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+typedef struct	s_vars {
+	void	*mlx;
+	void	*win;
+}				t_vars;
+
+int	close(int keycode, t_vars *vars)
 {
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	mlx_destroy_window(vars->mlx, vars->win);
+	return (0);
 }
-
 
 int	main(void)
 {
-	void	*mlx;
-	void	*mlx_win;
-	t_data	img;
+	t_vars	vars;
 
-	char *x = "Test";
-	(void)x;
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 800, 600, "Hello world!");
-	img.img = mlx_new_image(mlx, 800, 600);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-								&img.endian);
-	my_mlx_pixel_put(&img, 50, 50, 0x00FF0000);
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
+	vars.mlx = mlx_init();
+	vars.win = mlx_new_window(vars.mlx, 800, 600, "Hello world!");
+	mlx_hook(vars.win, 2, 1L << 0, close, &vars);
+	mlx_loop(vars.mlx);
 }
