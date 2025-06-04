@@ -1,6 +1,7 @@
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror
-DEBUG		=	-g
+C_FLAGS		=	-Wall -Wextra -Werror
+DEBUG_FLAGS =	-g
+DEBUG_EXEC	=	debug
 NAME		=	so_long
 HEADER		=	so_long.h
 MLX_FOLDER	=	mlx/
@@ -17,7 +18,7 @@ submodules	:
 	@$(MAKE) -C $(MLX_FOLDER)
 
 $(NAME)		: $(OBJ)
-	$(CC) $(OBJ) $(CFLAGS) $(LIBS) -o $(NAME)
+	$(CC) $(OBJ) $(CFLAGS) $(DEBUG_FLAGS) $(LIBS) -o $(NAME)
 
 %.o			: %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -26,12 +27,12 @@ clean		:
 	@rm -f $(OBJ)
 
 fclean		: clean
-	@rm -f $(NAME)
+	@rm -f $(NAME) $(DEBUG_EXEC)
 
 re			: fclean all
 
-debug		: fclean $(OBJ)
-
-	$(CC) $(OBJ) $(CFLAGS) $(DEBUG) $(LIBS) -o $(NAME)
+debug		: submodules fclean $(OBJ)
+	@rm -rf $(DEBUG_EXEC)
+	$(CC) $(OBJ) $(CFLAGS) $(DEBUG_FLAGS) $(LIBS) -o debug
 
 .PHONY: all clean fclean re submodules debug
