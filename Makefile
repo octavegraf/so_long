@@ -21,18 +21,17 @@ $(NAME)		: $(OBJ)
 	$(CC) $(OBJ) $(CFLAGS) $(DEBUG_FLAGS) $(LIBS) -o $(NAME)
 
 %.o			: %.c $(HEADER)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(DEBUG_FLAGS) -c $< -o $@
 
 clean		:
 	@rm -f $(OBJ)
 
 fclean		: clean
-	@rm -f $(NAME) $(DEBUG_EXEC)
+	@rm -f $(NAME) $(DEBUG_EXEC) $(MLX_LIB)
 
 re			: fclean all
 
-debug		: submodules fclean $(OBJ)
-	@rm -rf $(DEBUG_EXEC)
+debug		: fclean submodules $(OBJ)
 	$(CC) $(OBJ) $(CFLAGS) $(DEBUG_FLAGS) $(LIBS) -o debug
 
 .PHONY: all clean fclean re submodules debug
