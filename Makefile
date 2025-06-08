@@ -4,8 +4,14 @@ DEBUG_FLAGS =	-g
 DEBUG_EXEC	=	debug
 NAME		=	so_long
 HEADER		=	so_long.h
+GNL_FOLDER	=	get_next_line/
+GNL_LIB		=	$(GNL_FOLDER)/get_next_line.a
+PF_FOLDER	=	ft_printf/
+PF_LIB		=	$(PF_FOLDER)/libftprintf.a
 MLX_FOLDER	=	mlx/
 MLX_LIB		=	$(MLX_FOLDER)libmlx.a
+LIBFT_FOLDER=	libft/
+LIBFT_LIB	=	$(LIBFT_FOLDER)libft.a
 LIBS		=	-lX11 -lXext -lm $(MLX_LIB)
 
 SRC			=	$(wildcard *.c)
@@ -14,7 +20,7 @@ OBJ			=	$(SRC:.c=.o)
 all			:	submodules $(NAME)
 
 submodules	:
-https://github.com/octavegraf/ft_printf	@git submodule update --init --recursive
+@git submodule update --init
 	@$(MAKE) -C $(MLX_FOLDER)
 
 $(NAME)		: $(OBJ)
