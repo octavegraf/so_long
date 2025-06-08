@@ -14,7 +14,7 @@ OBJ			=	$(SRC:.c=.o)
 all			:	submodules $(NAME)
 
 submodules	:
-	@git submodule update --init --recursive
+https://github.com/octavegraf/ft_printf	@git submodule update --init --recursive
 	@$(MAKE) -C $(MLX_FOLDER)
 
 $(NAME)		: $(OBJ)

@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long__map_checker.c                             :+:      :+:    :+:   */
+/*   so_long__exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/05 15:31:28 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/08 12:16:36 by ocgraf           ###   ########.fr       */
+/*   Created: 2025/06/08 12:20:48 by ocgraf            #+#    #+#             */
+/*   Updated: 2025/06/08 12:27:05 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char	**map_checker(const char *path)
+void	return_message(void)
 {
-	int	file;
-
-	file = open(path, O_RDONLY);
+	ft_printf(stderr, "Error : %s\n", strerror(errno));
 }
