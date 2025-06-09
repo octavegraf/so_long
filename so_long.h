@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:25:58 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/09 14:25:40 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/09 15:09:40 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define SO_LONG_H
 
 # include "ft_printf/ft_printf.h"
-# include "ft_printf/libft/libft.h"
 # include "get_next_line/get_next_line.h"
 # include "minilibx/mlx.h"
 # include <errno.h>

@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:31:28 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/09 14:16:11 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/09 15:57:22 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	**get_map(const char *path)
 		{
 			line = ft_strtrim(temp, "\n");
 			free(temp);
-			ft_tab_add_row(map, line);
+			ft_tab_add_row(&map, line);
 		}
 		if (!temp)
 			break ;
@@ -89,16 +89,17 @@ int	check_map(char **map)
 	error = 0;
 	length = ft_strlen(map[0]);
 	error += different_char(map[0]);
+	i = -1;
 	while (map[++i])
 	{
-		if ((map[i][0] != '1') || (map[i][ft_strlen(map[i])] != '1')
-		|| ft_strlen(map[i]) != length)
+		if ((map[i][0] != '1') || (map[i][ft_strlen(map[i]) - 1] != '1')
+		|| (int)ft_strlen(map[i]) != length)
 		error++;
 	}
 	error += different_char(map[--i]);
 	error += check_map_collectibles(map);
 	if (error)
-		ft_printf("%s", "Invalid map");
+		return (ft_printf("%s", "Invalid map"), 1);
 	else
-		ft_printf("%s", "The map is valid.");
+		return (ft_printf("%s", "The map is valid."), 0);
 }
