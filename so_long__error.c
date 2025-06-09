@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 12:20:48 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/08 17:08:00 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/09 14:24:53 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@ void	return_error(int error)
 	if (error <= 132)
 		perror("Error: ");
 	else
-		
+		exit(EXIT_FAILURE);
 }

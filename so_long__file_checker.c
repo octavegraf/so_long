@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 12:15:55 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/08 15:43:52 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/09 14:14:39 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,5 @@ int	file_checker(const char *path)
 		return_error(2);
 	else
 		return (file);
+	return (0);
 }

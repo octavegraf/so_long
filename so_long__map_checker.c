@@ -6,12 +6,11 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:31:28 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/08 16:51:18 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/09 14:16:11 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
 
 char	**get_map(const char *path)
 {
@@ -20,6 +19,7 @@ char	**get_map(const char *path)
 	char	*line;
 	int		file;
 
+	ft_printf("%s", "Getting map");
 	file = file_checker(path);
 	map = NULL;
 	while (1)
@@ -41,6 +41,7 @@ int	different_char(char *str)
 {
 	int	i;
 
+	ft_printf("%s", "Checking different chars");
 	i = -1;
 	while (str[++i])
 	{
@@ -57,6 +58,7 @@ int	check_map_collectibles(char	**map)
 	int	e;
 	int	p;
 
+	ft_printf("%s", "Checking collectibles");
 	i = -1;
 	e = 0;
 	p = 0;
@@ -82,6 +84,7 @@ int	check_map(char **map)
 	int	length;
 	int	error;
 
+	ft_printf("%s", "Checking map");
 	i = 0;
 	error = 0;
 	length = ft_strlen(map[0]);
@@ -94,5 +97,8 @@ int	check_map(char **map)
 	}
 	error += different_char(map[--i]);
 	error += check_map_collectibles(map);
-	if ()
+	if (error)
+		ft_printf("%s", "Invalid map");
+	else
+		ft_printf("%s", "The map is valid.");
 }

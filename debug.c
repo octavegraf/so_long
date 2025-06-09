@@ -6,9 +6,15 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 12:04:57 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/08 12:09:35 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/09 14:24:08 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+int main(int argc, char **argv)
+{
+	check_map(get_map(argv[1]));
+	(void)argc;
+	return 0;
+}
