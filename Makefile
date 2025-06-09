@@ -1,6 +1,6 @@
 CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror
-DEBUG_FLAGS =	-g
+DEBUG_FLAGS =	-g -fsanitize=address
 DEBUG_EXEC	=	debug
 NAME		=	so_long
 HEADER		=	so_long.h
@@ -38,7 +38,7 @@ clean		:
 	@$(MAKE) -C $(PF_FOLDER) clean
 
 fclean		: clean
-	@rm -f $(NAME) $(DEBUG_EXEC) $(GNL_LIB) $(PF_LIB) $(MLX_LIB)
+	@rm -f $(NAME) $(DEBUG_EXEC) $(GNL_LIB) $(PF_LIB) $(LFT_LIB) $(MLX_LIB)
 
 re			: fclean all
 
