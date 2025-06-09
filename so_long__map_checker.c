@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:31:28 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/09 15:57:22 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/09 16:36:18 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	**get_map(const char *path)
 	char	*line;
 	int		file;
 
-	ft_printf("%s", "Getting map");
+	ft_printf("%s", "Getting map\n");
 	file = file_checker(path);
 	map = NULL;
 	while (1)
@@ -30,6 +30,7 @@ char	**get_map(const char *path)
 			line = ft_strtrim(temp, "\n");
 			free(temp);
 			ft_tab_add_row(&map, line);
+			free(line);
 		}
 		if (!temp)
 			break ;
@@ -41,7 +42,7 @@ int	different_char(char *str)
 {
 	int	i;
 
-	ft_printf("%s", "Checking different chars");
+	ft_printf("%s", "Checking different chars\n");
 	i = -1;
 	while (str[++i])
 	{
@@ -58,7 +59,7 @@ int	check_map_collectibles(char	**map)
 	int	e;
 	int	p;
 
-	ft_printf("%s", "Checking collectibles");
+	ft_printf("%s", "Checking collectibles\n");
 	i = -1;
 	e = 0;
 	p = 0;
@@ -84,7 +85,7 @@ int	check_map(char **map)
 	int	length;
 	int	error;
 
-	ft_printf("%s", "Checking map");
+	ft_printf("%s", "Checking map\n");
 	i = 0;
 	error = 0;
 	length = ft_strlen(map[0]);
@@ -99,7 +100,7 @@ int	check_map(char **map)
 	error += different_char(map[--i]);
 	error += check_map_collectibles(map);
 	if (error)
-		return (ft_printf("%s", "Invalid map"), 1);
+		return (ft_printf("%s", "Invalid map\n"), 1);
 	else
-		return (ft_printf("%s", "The map is valid."), 0);
+		return (ft_printf("%s", "The map is valid.\n"), 0);
 }
