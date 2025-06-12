@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:31:28 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/10 15:54:56 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/12 12:11:22 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,15 @@ char	**map_to_memory(const char *path)
 	temp = gnl_skip_whitespaces(file);
 	while (temp && *temp)
 	{
-		temp = get_next_line(file);
 		line = ft_strtrim(temp, " \n\t\v\f\r");
 		free(temp);
 		if (*line)
 			ft_tab_add_row(&map, line);
 		free(line);
+		temp = get_next_line(file);
 	}
+	if (temp)
+		free(temp);
 	return (map);
 }
 
