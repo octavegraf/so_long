@@ -6,15 +6,15 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 12:04:57 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/10 15:08:46 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/12 12:31:29 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int main(void)
-{
-	char **x = get_map("map_test");
-	(void)x;
-	return 0;
-}
+// int main(int argc, char **argv)
+// {
+// 	char **x = get_map("map_test");
+// 	(void)x;
+// 	return 0;
+// }
