@@ -6,27 +6,45 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 14:06:24 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/12 14:58:02 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/13 16:35:40 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+void	printf_tab(char **tab)
+{
+	int	i;
+
+	i = -1;
+	while (tab[++i])
+		ft_printf("%s\n", tab[i]);
+}
+
+int	gameplay_key(int key, void *data)
+{
+	t_data	*gameplay;
+
+	gameplay = (t_data *)data;
+	if (key == KEY_W || key == KEY_UP)
+		move_up(gameplay);
+	if (key == KEY_S || key == KEY_DOWN)
+		move_down(gameplay);
+	printf_tab(gameplay->map);
+	ft_printf("\n");
+	return (0);
+}
+
 int	main(void)
 {
 	void	*mlx;
-	void	*mlx_win;
-	void	*img;
-	int		x;
-	int		y;
+	void	*win;
+	t_data	gameplay;
 
-	x = 32;
-	y = 32;
 	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 800, 600, "so_long");
-	img = mlx_xpm_file_to_image(mlx, "./test.xpm", &x, &y);
-	void *img2 = mlx_xpm_file_to_image(mlx, "./test2.xpm", &x, &y);
-	mlx_put_image_to_window(mlx, mlx_win, img, 0, 0);
-	mlx_put_image_to_window(mlx, mlx_win, img2, 50, 50);
+	win = mlx_new_window(mlx, 800, 600, "so_long");
+	gameplay.map = get_map("map_test");
+	gameplay.count = 0;
+	mlx_key_hook(win, gameplay_key, &gameplay);
 	mlx_loop(mlx);
 }
