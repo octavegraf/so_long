@@ -10,6 +10,8 @@
 		"mlx.h": "c",
 		"errno.h": "c",
 		"fcntl.h": "c",
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"string.h": "c",
+		"keysym.h": "c"
 	}
 }
