@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:31:28 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/12 12:11:22 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/14 11:12:18 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ char	**map_to_memory(const char *path)
 char	**get_map(const char *path)
 {
 	char	**map;
-	int		i;
 
 	map = map_to_memory(path);
 	if (!map)
@@ -47,9 +46,7 @@ char	**get_map(const char *path)
 			NULL);
 	if (check_map(map))
 	{
-		i = -1;
-		while (map[++i])
-			free(map[i]);
+		free_it(map);
 		free(map);
 		return (ft_printf("%s", "Error: Invalid map. A map must contain 1 exit,"
 				" 1 starting position, at least 1 collectible and be surrounded"

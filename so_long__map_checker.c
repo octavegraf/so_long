@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long__map_check.c                               :+:      :+:    :+:   */
+/*   so_long__map_checker.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:31:28 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/10 15:52:47 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/14 14:11:30 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	different_char(char *str)
 	return (0);
 }
 
-int	check_map_collectibles(char	**map)
+int	check_map_components(char	**map)
 {
 	int	i;
 	int	c;
@@ -104,11 +104,10 @@ int	check_map(char **map)
 	{
 		if ((map[i][0] != '1') || (map[i][ft_strlen(map[i]) - 1] != '1')
 		|| (int)ft_strlen(map[i]) != length)
-		error++;
+			error++;
 	}
 	error += different_char(map[--i]);
 	error += check_map_collectibles(map);
 	error += check_map_chars(map);
 	return (error);
 }
-
