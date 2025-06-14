@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long__error.c                                   :+:      :+:    :+:   */
+/*   so_long__quit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 12:20:48 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/10 15:07:33 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/14 14:20:30 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
 
 void	return_error(int error)
 {
@@ -19,4 +18,23 @@ void	return_error(int error)
 	if (error <= 132)
 		perror("Error");
 	exit(EXIT_FAILURE);
+}
+
+void	free_it(char **this)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (this[++i])
+		free(this[i]);
+	free(this);
+}
+
+void	leave(t_data *data)
+{
+	mlx_destroy_window(data->mlx, data->win);
+	free_it(data->map);
+	ft_printf("Thank you for playing the game. See you soon :)\n");
+	exit(EXIT_SUCCESS);
 }
