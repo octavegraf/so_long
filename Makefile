@@ -12,7 +12,7 @@ LFT_FOLDER	=	$(PF_FOLDER)/libft/
 LFT_LIB		=	$(LFT_FOLDER)libft.a
 MLX_FOLDER	=	minilibx/
 MLX_LIB		=	$(MLX_FOLDER)libmlx.a
-#LX11_MAC	=	-L$(MLX_FOLDER) -I$(MLX_LIB) -framework OpenGL -L/usr/X11/lib -framework AppKit
+LX11_MAC	=	-L$(MLX_FOLDER) -I$(MLX_LIB) -framework OpenGL -L/usr/X11/lib -framework AppKit
 LX11_LINUX	=	-lX11 -lXext -lm
 LIBS		=	$(LX11_MAC) $(LX11_LINUX) $(MLX_LIB) $(PF_LIB) $(GNL_LIB)
 
