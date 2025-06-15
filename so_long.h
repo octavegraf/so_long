@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:25:58 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/14 14:32:30 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/15 16:00:06 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,20 @@ typedef struct s_data
 	void	*mlx;
 	void	*win;
 }	t_data;
+
+# define BACKGROUND_1 "./assets/background_1.xpm"
+# define BACKGROUND_2 "./assets/background_2.xpm"
+# define EMPTY_1 "./assets/empty_1.xpm"
+# define EMPTY_2 "./assets/empty_2.xpm"
+# define WALL_1 "./assets/wall_1.xpm"
+# define WALL_2 "./assets/wall_2.xpm"
+# define EXIT_1 "./assets/exit_1.xpm"
+# define EXIT_2 "./assets/exit_2.xpm"
+# define PLAYER_1 "./assets/player_1.xpm"
+# define PLAYER_2 "./assets/player_2.xpm"
+# define COLLECTIBLE_1 "./assets/collectible_1.xpm"
+# define COLLECTIBLE_2 "./assets/collectible_2.xpm"
+# define PX 64
 
 # ifdef __linux__
 #  define KEY_ESC 65307
@@ -59,8 +73,8 @@ int		move_left(t_data *data);
 int		move_right(t_data *data);
 int		collectibles_left(char **map);
 void	update_map(t_data *data);
-int		keyboard_events(int key, void *data, void *mlx, void *win);
-int		file_checker(const char *path);
+int		keyboard_events(int key, void *data);
+int		file_checker(const char *path, t_data *data);
 t_data	*so_long_init(char *map_path);
 char	*gnl_skip_whitespaces(int fd);
 int		different_char(char *str);
@@ -69,8 +83,11 @@ int		check_map_chars(char	**map);
 int		check_map(char **map);
 char	**map_to_memory(const char *path);
 char	**get_map(const char *path);
-void	return_error(int error);
+void	return_error(int error, t_data *data);
 void	free_it(char **this);
 void	leave(t_data *data);
+void	fill_background(t_data *data, char *sprite);
+char	get_element_by_position(t_data *data, int x, int y);
+int		frame_1(t_data *data);
 
 #endif

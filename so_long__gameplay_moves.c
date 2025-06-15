@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 14:06:34 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/13 20:19:38 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/14 15:15:48 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,69 +34,68 @@ void	get_position(t_data *data)
 	(*map)[i][j] = '0';
 	data->y = i;
 	data->x = j;
-	return (data);
 }
 
 int	move_up(t_data *data)
 {
 	char				***map;
-	int					*x;
-	int					*y;
+	int					x;
+	int					y;
 
 	map = &data->map;
-	*x = &data->x;
-	*y = &data->y;
-	if (*y >= 1 && (*map)[*y - 1][*x] != '1')
-		*y--;
+	x = data->x;
+	y = data->y;
+	if (y >= 1 && (*map)[y - 1][x] != '1')
+		data->y -= 1;
 	else
 		return (0);
-	return (data->moves++, 1);
+	return (data->moves += 1, 1);
 }
 
 int	move_down(t_data *data)
 {
 	char				***map;
-	int					*x;
-	int					*y;
+	int					x;
+	int					y;
 
 	map = &data->map;
-	x = &data->x;
-	y = &data->y;
-	if ((*map)[*y + 1] && (*map)[*y + 1][*x] != '1')
-		*y++;
+	x = data->x;
+	y = data->y;
+	if ((*map)[y + 1] && (*map)[y + 1][x] != '1')
+		data->y += 1;
 	else
 		return (0);
-	return (data->moves++, 1);
+	return (data->moves += 1, 1);
 }
 
 int	move_left(t_data *data)
 {
 	char				***map;
-	int					*x;
-	int					*y;
+	int					x;
+	int					y;
 
 	map = &data->map;
-	*x = &data->x;
-	*y = &data->y;
-	if (x >= 1 && (*map)[*y][*x - 1] != '1')
-		*x--;
+	x = data->x;
+	y = data->y;
+	if (x >= 1 && (*map)[y][x - 1] != '1')
+		data->x -= 1;
 	else
 		return (0);
-	return (data->moves++, 1);
+	return (data->moves += 1, 1);
 }
 
 int	move_right(t_data *data)
 {
 	char				***map;
-	int					*x;
-	int					*y;
+	int					x;
+	int					y;
 
 	map = &data->map;
-	*x = &data->x;
-	*y = &data->y;
-	if ((*map)[*y][*x + 1] && (*map)[*y][*x + 1] != '1')
-		*x++;
+	x = data->x;
+	y = data->y;
+	if ((*map)[y][x + 1] && (*map)[y][x + 1] != '1')
+		data->x += 1;
 	else
 		return (0);
-	return (data->moves++, 1);
+	return (data->moves += 1, 1);
 }

@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 20:15:27 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/14 14:26:52 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/14 15:27:58 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	collectibles_left(char **map)
 			if (map[i][j] == 'C')
 				collectibles++;
 	}
+	return (collectibles);
 }
 
 void	update_map(t_data *data)
@@ -46,6 +47,7 @@ int	keyboard_events(int key, void *data)
 	int		response;
 
 	gameplay = (t_data *)data;
+	response = 0;
 	if (key == KEY_W || key == KEY_UP)
 		response = move_up(gameplay);
 	else if (key == KEY_S || key == KEY_DOWN)
