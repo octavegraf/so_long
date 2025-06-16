@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 12:15:55 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/14 19:14:38 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/16 17:47:03 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ t_data	*so_long_init(char *map_path)
 	data->collectibles = check_map_components(data->map);
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, 832, 576, "so_long");
+	data->sprites = init_sprites(data);
 	return (data);
 }

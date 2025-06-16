@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 12:20:48 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/14 15:53:40 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/16 17:56:14 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,14 @@ void	return_error(int error, t_data *data)
 	errno = error;
 	if (error <= 132)
 		perror("Error");
-	if (data->map)
+	if (data && data->map)
 		free_it(data->map);
-	if (data->win)
+	if (data && data->win)
 		mlx_destroy_window(data->mlx, data->win);
+	if (data && data->sprites)
+		free(data->sprites);
+	if (data)
+		free(data);
 	exit(EXIT_FAILURE);
 }
 

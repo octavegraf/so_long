@@ -12,6 +12,7 @@
 		"fcntl.h": "c",
 		"stdlib.h": "c",
 		"string.h": "c",
-		"keysym.h": "c"
+		"keysym.h": "c",
+		"so_long__frames": "c"
 	}
 }
