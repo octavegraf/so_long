@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 12:20:48 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/16 17:56:14 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/17 16:21:13 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,42 @@ void	return_error(int error, t_data *data)
 		perror("Error");
 	if (data && data->map)
 		free_it(data->map);
+	if (data && data->frame_1)
+	{
+		free_sprites(data, data->frame_1);
+		free(data->frame_1);
+	}
+	if (data && data->frame_1)
+	{
+		free_sprites(data, data->frame_2);
+		free(data->frame_2);
+	}
 	if (data && data->win)
 		mlx_destroy_window(data->mlx, data->win);
-	if (data && data->sprites)
-		free(data->sprites);
+	if (data && data->mlx)
+	{
+		mlx_destroy_display(data->mlx);
+		free(data->mlx);
+	}
 	if (data)
 		free(data);
 	exit(EXIT_FAILURE);
+}
+
+void	free_sprites(t_data *data, t_sprites *sprites)
+{
+	if (sprites->background)
+		mlx_destroy_image(data->mlx, sprites->background);
+	if (sprites->empty)
+		mlx_destroy_image(data->mlx, sprites->empty);
+	if (sprites->wall)
+		mlx_destroy_image(data->mlx, sprites->wall);
+	if (sprites->exit)
+		mlx_destroy_image(data->mlx, sprites->exit);
+	if (sprites->player)
+		mlx_destroy_image(data->mlx, sprites->player);
+	if (sprites->collectible)
+		mlx_destroy_image(data->mlx, sprites->collectible);
 }
 
 void	free_it(char **this)

@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 12:15:55 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/16 17:47:03 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/17 18:32:37 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,28 @@ int	file_checker(const char *path, t_data *data)
 	return (0);
 }
 
+void	detect_player(t_data *data)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (data->map[y])
+	{
+		while (data->map[y][x])
+		{
+			if (data->map[y][x] == 'P')
+			{
+				data->x = x;
+				data->y = y;
+			}
+			x++;
+		}
+		y++;
+	}
+}
+
 t_data	*so_long_init(char *map_path)
 {
 	t_data	*data;
@@ -36,10 +58,26 @@ t_data	*so_long_init(char *map_path)
 	}
 	data->map = get_map(map_path);
 	data->moves = 0;
-	get_position(data);
+	detect_player(data);
 	data->collectibles = check_map_components(data->map);
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, 832, 576, "so_long");
-	data->sprites = init_sprites(data);
+	data->frame_1 = init_sprites(data);
+	data->frame_2 = init_sprites(data);
+	init_sprites_frames_1(data);
+	init_sprites_frames_2(data);
 	return (data);
+}
+
+t_sprites	*init_sprites(t_data *data)
+{
+	t_sprites	*sprites;
+
+	sprites = malloc(sizeof(t_sprites));
+	if (!sprites)
+	{
+		ft_printf("Error : Can't initialize sprites.");
+		return_error(134, data);
+	}
+	return (sprites);
 }

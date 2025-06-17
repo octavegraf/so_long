@@ -1,45 +1,94 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long__frames                                    :+:      :+:    :+:   */
+/*   so_long__frames.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 16:08:35 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/16 17:53:44 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/17 18:19:11 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	sprites_frames(t_sprites *sprites, int frame)
+void	init_sprites_frames_1(t_data *data)
 {
-	if (frame == 1)
-	{
-		sprites->background = BACKGROUND_1;
-		sprites->collectible = COLLECTIBLE_1;
-		sprites->empty = EMPTY_1;
-		sprites->exit = EXIT_1;
-		sprites->player = PLAYER_1;
-		sprites->wall = WALL_1;
-	}
-	if (frame == 2)
-	{
-		sprites->background = BACKGROUND_2;
-		sprites->collectible = COLLECTIBLE_2;
-		sprites->empty = EMPTY_2;
-		sprites->exit = EXIT_2;
-		sprites->player = PLAYER_2;
-		sprites->wall = WALL_2;
-	}
+	int	width;
+	int	height;
+
+	if ((!file_checker(BACKGROUND_1, data))
+		&& (!file_checker(COLLECTIBLE_1, data))
+		&& (!file_checker(EMPTY_1, data))
+		&& (!file_checker(EXIT_1, data))
+		&& (!file_checker(PLAYER_1, data))
+		&& (!file_checker(WALL_1, data)))
+		return ;
+	data->frame_1->background = mlx_xpm_file_to_image(data->mlx,
+			BACKGROUND_1, &width, &height);
+	data->frame_1->collectible = mlx_xpm_file_to_image(data->mlx,
+			COLLECTIBLE_1, &width, &height);
+	data->frame_1->empty = mlx_xpm_file_to_image(data->mlx,
+			EMPTY_1, &width, &height);
+	data->frame_1->exit = mlx_xpm_file_to_image(data->mlx,
+			EXIT_1, &width, &height);
+	data->frame_1->player = mlx_xpm_file_to_image(data->mlx,
+			PLAYER_1, &width, &height);
+	data->frame_1->wall = mlx_xpm_file_to_image(data->mlx,
+			WALL_1, &width, &height);
+}
+
+void	init_sprites_frames_2(t_data *data)
+{
+	int	width;
+	int	height;
+
+	if ((!file_checker(BACKGROUND_2, data))
+		&& (!file_checker(COLLECTIBLE_2, data))
+		&& (!file_checker(EMPTY_2, data))
+		&& (!file_checker(EXIT_2, data))
+		&& (!file_checker(PLAYER_2, data))
+		&& (!file_checker(WALL_2, data)))
+		return ;
+	data->frame_2->background = mlx_xpm_file_to_image(data->mlx,
+			BACKGROUND_2, &width, &height);
+	data->frame_2->collectible = mlx_xpm_file_to_image(data->mlx,
+			COLLECTIBLE_2, &width, &height);
+	data->frame_2->empty = mlx_xpm_file_to_image(data->mlx,
+			EMPTY_2, &width, &height);
+	data->frame_2->exit = mlx_xpm_file_to_image(data->mlx,
+			EXIT_2, &width, &height);
+	data->frame_2->player = mlx_xpm_file_to_image(data->mlx,
+			PLAYER_2, &width, &height);
+	data->frame_2->wall = mlx_xpm_file_to_image(data->mlx,
+			WALL_2, &width, &height);
 }
 
 int	frames(t_data *data)
 {
-	fill_background(data, BACKGROUND_1);
-	print_map(data, data->sprites, 1);
-	usleep(500000);
-	fill_background(data, BACKGROUND_2);
-	print_map(data, data->sprites, 2);
+	static struct timeval	last = {0};
+	struct timeval			now;
+	static int				frame = 0;
+	long					delta;
+
+	delta = (now.tv_sec - last.tv_sec) * 1000000 + (now.tv_usec - last.tv_usec);
+	gettimeofday(&now, NULL);
+	if (delta >= 500000)
+	{
+		last = now;
+		frame = !frame;
+		if (frame == 0)
+		{
+			fill_background(data, data->frame_1->background);
+			print_map(data, data->frame_1, 0, 0);
+			mlx_do_sync(data->mlx);
+		}
+		else
+		{
+			fill_background(data, data->frame_2->background);
+			print_map(data, data->frame_2, 0, 0);
+			mlx_do_sync(data->mlx);
+		}
+	}
 	return (0);
 }

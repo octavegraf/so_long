@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:25:58 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/16 17:54:09 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/17 18:33:05 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,16 @@
 # include "minilibx/mlx.h"
 # include <errno.h>
 # include <string.h>
+#include <sys/time.h>
 
 typedef struct s_sprites
 {
-	char	*background;
-	char	*empty;
-	char	*wall;
-	char	*exit;
-	char	*player;
-	char	*collectible;
-	int		x;
-	int		y;
+	void	*background;
+	void	*empty;
+	void	*wall;
+	void	*exit;
+	void	*player;
+	void	*collectible;
 }	t_sprites;
 
 
@@ -41,7 +40,8 @@ typedef struct s_data
 	int			collectibles;
 	void		*mlx;
 	void		*win;
-	t_sprites	*sprites;
+	t_sprites	*frame_1;
+	t_sprites	*frame_2;
 }	t_data;
 
 # define BACKGROUND_1 "./assets/background_1.xpm"
@@ -80,16 +80,17 @@ typedef struct s_data
 #  define KEY_RIGHT 65363
 # endif
 
-void		fill_background(t_data *data, char *sprite);
+void		fill_background(t_data *data, void *background);
 char		get_element_by_position(t_data *data, int x, int y);
 t_sprites	*init_sprites(t_data *data);
 void		place_image(t_data *data, t_sprites *sprites, char element);
-void		print_map(t_data *data, t_sprites *sprites, int frame);
+void		print_map(t_data *data, t_sprites *sprites, int x, int y);
 
 void		sprites_frames(t_sprites *sprites, int frame);
+void		init_sprites_frames_1(t_data *data);
+void		init_sprites_frames_2(t_data *data);
 int			frames(t_data *data);
 
-void		get_position(t_data *data);
 int			move_up(t_data *data);
 int			move_down(t_data *data);
 int			move_left(t_data *data);
@@ -100,6 +101,7 @@ void		update_map(t_data *data);
 int			keyboard_events(int key, void *data);
 
 int			file_checker(const char *path, t_data *data);
+void		detect_player(t_data *data);
 t_data		*so_long_init(char *map_path);
 
 char		*gnl_skip_whitespaces(int fd);
@@ -112,6 +114,7 @@ char		**map_to_memory(const char *path);
 char		**get_map(const char *path);
 
 void		return_error(int error, t_data *data);
+void		free_sprites(t_data *data, t_sprites *sprites);
 void		free_it(char **this);
 void		leave(t_data *data);
 

@@ -1,6 +1,7 @@
 CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror
-DEBUG_FLAGS =	-g -fsanitize=address
+#F_SANITIZE	=	-fsanitize=address
+DEBUG_FLAGS =	-g $(F_SANITIZE)
 DEBUG_EXEC	=	debug
 NAME		=	so_long
 HEADER		=	so_long.h
