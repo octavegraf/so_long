@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 12:20:48 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/17 16:21:13 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/18 14:24:26 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,13 @@ void	return_error(int error, t_data *data)
 	errno = error;
 	if (error <= 132)
 		perror("Error");
-	if (data && data->map)
-		free_it(data->map);
-	if (data && data->frame_1)
+	if (data->canva)
 	{
-		free_sprites(data, data->frame_1);
-		free(data->frame_1);
+		if (data->canva->img)
+			mlx_destroy_image(data->mlx, data->canva->img);
+		free(data->canva);
 	}
-	if (data && data->frame_1)
-	{
-		free_sprites(data, data->frame_2);
-		free(data->frame_2);
-	}
-	if (data && data->win)
-		mlx_destroy_window(data->mlx, data->win);
-	if (data && data->mlx)
-	{
-		mlx_destroy_display(data->mlx);
-		free(data->mlx);
-	}
-	if (data)
-		free(data);
+	clear_everything(data);
 	exit(EXIT_FAILURE);
 }
 
@@ -73,4 +59,29 @@ void	leave(t_data *data)
 	free_it(data->map);
 	ft_printf("Thank you for playing the game. See you soon :)\n");
 	exit(EXIT_SUCCESS);
+}
+
+void	clear_everything(t_data *data)
+{
+	if (data && data->map)
+		free_it(data->map);
+	if (data && data->frame_1)
+	{
+		free_sprites(data, data->frame_1);
+		free(data->frame_1);
+	}
+	if (data && data->frame_1)
+	{
+		free_sprites(data, data->frame_2);
+		free(data->frame_2);
+	}
+	if (data && data->win)
+		mlx_destroy_window(data->mlx, data->win);
+	if (data && data->mlx)
+	{
+		mlx_destroy_display(data->mlx);
+		free(data->mlx);
+	}
+	if (data)
+		free(data);
 }

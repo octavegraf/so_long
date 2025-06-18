@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:25:58 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/17 18:33:05 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/18 16:48:47 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "minilibx/mlx.h"
 # include <errno.h>
 # include <string.h>
-#include <sys/time.h>
+# include <sys/time.h>
 
 typedef struct s_sprites
 {
@@ -30,6 +30,17 @@ typedef struct s_sprites
 	void	*collectible;
 }	t_sprites;
 
+typedef struct s_canva
+{
+	void	*img;
+	int		i_bpp;
+	int		i_size_line;
+	int		i_endian;
+	void	*sprite;
+	int		s_bpp;
+	int		s_size_line;
+	int		s_endian;
+}	t_canva;
 
 typedef struct s_data
 {
@@ -40,8 +51,11 @@ typedef struct s_data
 	int			collectibles;
 	void		*mlx;
 	void		*win;
+	void		*img1;
+	void		*img2;
 	t_sprites	*frame_1;
 	t_sprites	*frame_2;
+	t_canva		*canva;
 }	t_data;
 
 # define BACKGROUND_1 "./assets/background_1.xpm"
@@ -83,12 +97,16 @@ typedef struct s_data
 void		fill_background(t_data *data, void *background);
 char		get_element_by_position(t_data *data, int x, int y);
 t_sprites	*init_sprites(t_data *data);
-void		place_image(t_data *data, t_sprites *sprites, char element);
+void		place_image(t_data *data, t_canva *canva, int x, int y);
+void		draw(t_data *data, t_sprites *sprites, int x, int y);
+void		get_sprite_addr(t_data *data, t_sprites *sprites, char c);
+
 void		print_map(t_data *data, t_sprites *sprites, int x, int y);
 
 void		sprites_frames(t_sprites *sprites, int frame);
 void		init_sprites_frames_1(t_data *data);
 void		init_sprites_frames_2(t_data *data);
+t_canva		*init_canva(t_data *data);
 int			frames(t_data *data);
 
 int			move_up(t_data *data);
@@ -117,5 +135,6 @@ void		return_error(int error, t_data *data);
 void		free_sprites(t_data *data, t_sprites *sprites);
 void		free_it(char **this);
 void		leave(t_data *data);
+void		clear_everything(t_data *data);
 
 #endif

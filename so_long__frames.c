@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 16:08:35 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/17 18:19:11 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/18 16:52:24 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,29 +66,9 @@ void	init_sprites_frames_2(t_data *data)
 
 int	frames(t_data *data)
 {
-	static struct timeval	last = {0};
-	struct timeval			now;
-	static int				frame = 0;
-	long					delta;
-
-	delta = (now.tv_sec - last.tv_sec) * 1000000 + (now.tv_usec - last.tv_usec);
-	gettimeofday(&now, NULL);
-	if (delta >= 500000)
-	{
-		last = now;
-		frame = !frame;
-		if (frame == 0)
-		{
-			fill_background(data, data->frame_1->background);
-			print_map(data, data->frame_1, 0, 0);
-			mlx_do_sync(data->mlx);
-		}
-		else
-		{
-			fill_background(data, data->frame_2->background);
-			print_map(data, data->frame_2, 0, 0);
-			mlx_do_sync(data->mlx);
-		}
-	}
+	draw(data, data->frame_1, 0, 0);
+	data->img1 = data->canva->img;
+	mlx_put_image_to_window(data->mlx, data->win, data->img1, 0, 0);
 	return (0);
 }
+

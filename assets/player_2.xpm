@@ -1,10 +1,8 @@
 /* XPM */
-static char *_2707d9bfb994f3ad07b003e43bf40cdNA4BiNwoitRkgUme[] = {
-/* columns rows colors chars-per-pixel */
-"64 64 2 1 ",
-"  c None",
-". c black",
-/* pixels */
+static char * player_2_xpm[] = {
+"64 64 2 1",
+" 	c None",
+".	c #FF0000",
 "                                                                ",
 "                                                                ",
 "                                                                ",
@@ -68,5 +66,4 @@ static char *_2707d9bfb994f3ad07b003e43bf40cdNA4BiNwoitRkgUme[] = {
 "                                                                ",
 "                                                                ",
 "                                                                ",
-"                                                                "
-};
+"                                                                "};

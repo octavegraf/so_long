@@ -6,27 +6,33 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:28:26 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/17 18:13:36 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/18 16:56:59 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	fill_background(t_data *data, void *background)
+void	draw(t_data *data, t_sprites *sprites, int x, int y)
 {
-	int	y;
-	int	x;
-
-	y = 0;
-	while (y <= PX * 8)
+	y = -1;
+	while (++y <= 8)
 	{
-		x = 0;
-		while (x <= PX * 12)
+		x = -1;
+		while (++x <= 12)
 		{
-			mlx_put_image_to_window(data->mlx, data->win, background, x, y);
-			x += PX;
+			get_sprite_addr(data, sprites, '\0');
+			place_image(data, data->canva, x, y);
 		}
-		y += PX;
+	}
+	y = -1;
+	while (++y <= 8)
+	{
+		x = -1;
+		while (++x <= 12)
+		{
+			get_sprite_addr(data, sprites, get_element_by_position(data, x, y));
+			place_image(data, data->canva, x, y);
+		}
 	}
 }
 
@@ -47,36 +53,53 @@ char	get_element_by_position(t_data *data, int x, int y)
 		if (x >= 0 && data->map[i] && x <= ((int)ft_strlen(data->map[i])))
 			result = data->map[y][x];
 	}
-	if (!result)
-		result = '1';
 	return (result);
 }
 
-
-
-void	print_map(t_data *data, t_sprites *sprites, int x, int y)
+void	get_sprite_addr(t_data *data, t_sprites *sprites, char c)
 {
-	y = -1;
-	while (++y < 12)
+	int		*s_bpp;
+	int		*s_size_line;
+	int		*s_endian;
+
+	s_bpp = &data->canva->s_bpp;
+	s_size_line = &data->canva->s_size_line;
+	s_endian = &data->canva->s_endian;
+	if (c == '0')
+		mlx_get_data_addr(data->canva->sprite, s_bpp, s_size_line, s_endian);
+	else if (c == '1')
+		mlx_get_data_addr(sprites->wall, s_bpp, s_size_line, s_endian);
+	else if (c == 'C')
+		mlx_get_data_addr(sprites->collectible, s_bpp, s_size_line, s_endian);
+	else if (c == 'E')
+		mlx_get_data_addr(sprites->exit, s_bpp, s_size_line, s_endian);
+	else if (c == 'P')
+		mlx_get_data_addr(sprites->player, s_bpp, s_size_line, s_endian);
+	else if (!c)
+		mlx_get_data_addr(sprites->background, s_bpp, s_size_line, s_endian);
+}
+
+void	place_image(t_data *data, t_canva *canva, int x, int y)
+{
+	int				i;
+	int				j;
+	int				src;
+	int				dst;
+	unsigned int	color;
+
+	i = 0;
+	while (i < 64)
 	{
-		x = -1;
-		while (++x < 8)
+		j = 0;
+		while (j < 64)
 		{
-			if (get_element_by_position(data, x, y) == '0')
-				mlx_put_image_to_window(data->mlx, data->win, sprites->empty,
-					x * PX, y * PX);
-			else if (get_element_by_position(data, x, y) == '1')
-				mlx_put_image_to_window(data->mlx, data->win, sprites->wall,
-					x * PX, y * PX);
-			else if (get_element_by_position(data, x, y) == 'C')
-				mlx_put_image_to_window(data->mlx, data->win,
-					sprites->collectible, x * PX, y * PX);
-			else if (get_element_by_position(data, x, y) == 'E')
-				mlx_put_image_to_window(data->mlx, data->win,
-					sprites->exit, x * PX, y * PX);
-			else if (get_element_by_position(data, x, y) == 'P')
-				mlx_put_image_to_window(data->mlx, data->win, sprites->player,
-					x * PX, y * PX);
+			src = (i * canva->i_size_line) + (j * (canva->i_bpp / 8));
+			dst = ((y * 64 + i) * canva->i_size_line) + ((x * 64 + j) * (canva->i_bpp / 8));
+			color = *(unsigned int *)(canva->img + src);
+			*(unsigned int *)(canva->img + dst) = color;
+			j++;
 		}
+		i++;
 	}
+	(void)data;
 }
