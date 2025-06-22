@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 14:06:24 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/18 16:58:00 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/22 17:01:34 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,5 @@ int	main(void)
 
 	data = so_long_init("map_test");
 	draw(data, data->frame_1, 0, 0);
-	data->img1 = data->canva->img;
-	mlx_put_image_to_window(data->mlx, data->win, data->img1, 0, 0);
-	return (0);
+	mlx_put_image_to_window(data->mlx, data->win, data->canva->img, 0, 0);
 }

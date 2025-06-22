@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 12:15:55 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/18 14:20:53 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/22 17:29:28 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,17 @@ void	detect_player(t_data *data)
 	int	x;
 	int	y;
 
-	x = 0;
 	y = 0;
 	while (data->map[y])
 	{
+		x = 0;
 		while (data->map[y][x])
 		{
 			if (data->map[y][x] == 'P')
 			{
 				data->x = x;
 				data->y = y;
+				return ;
 			}
 			x++;
 		}
@@ -57,8 +58,8 @@ t_data	*so_long_init(char *map_path)
 		return_error(134, data);
 	}
 	data->map = get_map(map_path);
-	data->moves = 0;
 	detect_player(data);
+	data->moves = 0;
 	data->collectibles = check_map_components(data->map);
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, 832, 576, "so_long");

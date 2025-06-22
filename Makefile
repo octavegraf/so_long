@@ -1,6 +1,6 @@
 CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror
-#F_SANITIZE	=	-fsanitize=address
+F_SANITIZE	=	-fsanitize=address
 DEBUG_FLAGS =	-g $(F_SANITIZE)
 DEBUG_EXEC	=	debug
 NAME		=	so_long
@@ -13,7 +13,7 @@ LFT_FOLDER	=	$(PF_FOLDER)/libft/
 LFT_LIB		=	$(LFT_FOLDER)libft.a
 MLX_FOLDER	=	minilibx/
 MLX_LIB		=	$(MLX_FOLDER)libmlx.a
-#LX11_MAC	=	-L$(MLX_FOLDER) -I$(MLX_LIB) -framework OpenGL -L/usr/X11/lib -framework AppKit
+LX11_MAC	=	-L$(MLX_FOLDER) -I$(MLX_LIB) -framework OpenGL -L/usr/X11/lib -framework AppKit
 LX11_LINUX	=	-lX11 -lXext -lm
 LIBS		=	$(LX11_MAC) $(LX11_LINUX) $(MLX_LIB) $(PF_LIB) $(GNL_LIB)
 

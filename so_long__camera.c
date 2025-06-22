@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:28:26 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/18 16:56:59 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/22 17:51:44 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	draw(t_data *data, t_sprites *sprites, int x, int y)
 		while (++x <= 12)
 		{
 			get_sprite_addr(data, sprites, get_element_by_position(data, x, y));
-			place_image(data, data->canva, x, y);
+			place_image(data, data->canva, x * PX, y * PX);
 		}
 	}
 }
@@ -50,7 +50,7 @@ char	get_element_by_position(t_data *data, int x, int y)
 	i--;
 	if (y >= 0 && y <= i)
 	{
-		if (x >= 0 && data->map[i] && x <= ((int)ft_strlen(data->map[i])))
+		if (x >= 0 && data->map[y] && x < (int)ft_strlen(data->map[y]))
 			result = data->map[y][x];
 	}
 	return (result);
@@ -66,7 +66,7 @@ void	get_sprite_addr(t_data *data, t_sprites *sprites, char c)
 	s_size_line = &data->canva->s_size_line;
 	s_endian = &data->canva->s_endian;
 	if (c == '0')
-		mlx_get_data_addr(data->canva->sprite, s_bpp, s_size_line, s_endian);
+		mlx_get_data_addr(sprites->empty, s_bpp, s_size_line, s_endian);
 	else if (c == '1')
 		mlx_get_data_addr(sprites->wall, s_bpp, s_size_line, s_endian);
 	else if (c == 'C')
@@ -94,7 +94,8 @@ void	place_image(t_data *data, t_canva *canva, int x, int y)
 		while (j < 64)
 		{
 			src = (i * canva->i_size_line) + (j * (canva->i_bpp / 8));
-			dst = ((y * 64 + i) * canva->i_size_line) + ((x * 64 + j) * (canva->i_bpp / 8));
+			dst = ((y * 64 + i) * canva->i_size_line) + ((x * 64 + j)
+					* (canva->i_bpp / 8));
 			color = *(unsigned int *)(canva->img + src);
 			*(unsigned int *)(canva->img + dst) = color;
 			j++;
