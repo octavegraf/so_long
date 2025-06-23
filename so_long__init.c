@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 12:15:55 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/22 17:29:28 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/23 14:38:22 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_data	*so_long_init(char *map_path)
 	data->moves = 0;
 	data->collectibles = check_map_components(data->map);
 	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, 832, 576, "so_long");
+	data->win = mlx_new_window(data->mlx, 13 * PX, 9 * PX, "so_long");
 	data->frame_1 = init_sprites(data);
 	data->frame_2 = init_sprites(data);
 	init_sprites_frames_1(data);
@@ -94,7 +94,7 @@ t_canva	*init_canva(t_data *data)
 		ft_printf("Error : Can't initialize canva.");
 		return_error(134, data);
 	}
-	canva->img = mlx_new_image(data->mlx, 12 * PX, 8 * PX);
+	canva->img = mlx_new_image(data->mlx, 13 * PX, 9 * PX);
 	canva->i_bpp = 0;
 	canva->i_size_line = 0;
 	canva->i_endian = 0;

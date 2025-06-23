@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:25:58 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/18 16:48:47 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/23 12:43:12 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,12 @@ typedef struct s_canva
 	int		i_bpp;
 	int		i_size_line;
 	int		i_endian;
+	char	*i_px;
 	void	*sprite;
 	int		s_bpp;
 	int		s_size_line;
 	int		s_endian;
+	char	*s_px;
 }	t_canva;
 
 typedef struct s_data
@@ -97,9 +99,10 @@ typedef struct s_data
 void		fill_background(t_data *data, void *background);
 char		get_element_by_position(t_data *data, int x, int y);
 t_sprites	*init_sprites(t_data *data);
-void		place_image(t_data *data, t_canva *canva, int x, int y);
+void		place_image(t_data *data, int x, int y);
 void		draw(t_data *data, t_sprites *sprites, int x, int y);
 void		get_sprite_addr(t_data *data, t_sprites *sprites, char c);
+void		get_canva_addr(t_data *data);
 
 void		print_map(t_data *data, t_sprites *sprites, int x, int y);
 
