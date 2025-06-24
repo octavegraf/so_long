@@ -6,11 +6,12 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 16:08:35 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/18 16:52:24 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/24 15:53:12 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include <sys/time.h>
 
 void	init_sprites_frames_1(t_data *data)
 {
@@ -18,11 +19,11 @@ void	init_sprites_frames_1(t_data *data)
 	int	height;
 
 	if ((!file_checker(BACKGROUND_1, data))
-		&& (!file_checker(COLLECTIBLE_1, data))
-		&& (!file_checker(EMPTY_1, data))
-		&& (!file_checker(EXIT_1, data))
-		&& (!file_checker(PLAYER_1, data))
-		&& (!file_checker(WALL_1, data)))
+		|| (!file_checker(COLLECTIBLE_1, data))
+		|| (!file_checker(EMPTY_1, data))
+		|| (!file_checker(EXIT_1, data))
+		|| (!file_checker(PLAYER_1, data))
+		|| (!file_checker(WALL_1, data)))
 		return ;
 	data->frame_1->background = mlx_xpm_file_to_image(data->mlx,
 			BACKGROUND_1, &width, &height);
@@ -44,11 +45,11 @@ void	init_sprites_frames_2(t_data *data)
 	int	height;
 
 	if ((!file_checker(BACKGROUND_2, data))
-		&& (!file_checker(COLLECTIBLE_2, data))
-		&& (!file_checker(EMPTY_2, data))
-		&& (!file_checker(EXIT_2, data))
-		&& (!file_checker(PLAYER_2, data))
-		&& (!file_checker(WALL_2, data)))
+		|| (!file_checker(COLLECTIBLE_2, data))
+		|| (!file_checker(EMPTY_2, data))
+		|| (!file_checker(EXIT_2, data))
+		|| (!file_checker(PLAYER_2, data))
+		|| (!file_checker(WALL_2, data)))
 		return ;
 	data->frame_2->background = mlx_xpm_file_to_image(data->mlx,
 			BACKGROUND_2, &width, &height);
@@ -66,9 +67,20 @@ void	init_sprites_frames_2(t_data *data)
 
 int	frames(t_data *data)
 {
-	draw(data, data->frame_1, 0, 0);
-	data->img1 = data->canva->img;
-	mlx_put_image_to_window(data->mlx, data->win, data->img1, 0, 0);
+	struct timeval	current_time;
+
+	gettimeofday(&current_time, NULL);
+	if (current_time.tv_usec < 500000)
+	{
+		draw(data, data->frame_1, 0, 0);
+		mlx_put_image_to_window(data->mlx, data->win, data->canva->img, 0, 0);
+		mlx_string_put(data->mlx, data->win, 10, 18, 0, ft_itoa(data->moves));
+	}
+	else
+	{
+		draw(data, data->frame_2, 0, 0);
+		mlx_put_image_to_window(data->mlx, data->win, data->canva->img, 0, 0);
+		mlx_string_put(data->mlx, data->win, 10, 18, 0, ft_itoa(data->moves));
+	}
 	return (0);
 }
-

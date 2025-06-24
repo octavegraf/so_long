@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:28:26 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/23 17:37:32 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/24 15:52:54 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	draw(t_data *data, t_sprites *sprites, int x, int y)
 {
-
 	get_canva_addr(data);
 	y = -1;
 	while (++y <= 8)
@@ -23,7 +22,7 @@ void	draw(t_data *data, t_sprites *sprites, int x, int y)
 		while (++x <= 12)
 		{
 			get_sprite_addr(data, sprites, '\0');
-			place_image(data, x, y);
+			place_image(data, x, y, 0);
 		}
 	}
 	y = -1;
@@ -33,9 +32,11 @@ void	draw(t_data *data, t_sprites *sprites, int x, int y)
 		while (++x <= 12)
 		{
 			get_sprite_addr(data, sprites, get_element_by_position(data, x, y));
-			place_image(data, x, y);
+			place_image(data, x, y, 0);
 		}
 	}
+	get_sprite_addr(data, sprites, 'P');
+	place_image(data, 6, 4, 0);
 }
 
 char	get_element_by_position(t_data *data, int x, int y)
@@ -100,20 +101,28 @@ void	get_canva_addr(t_data *data)
 			i_size_line, i_endian);
 }
 
-void	place_image(t_data *data, int x, int y)
+void	place_image(t_data *data, int x, int y, int b)
 {
 	int		i;
 	int		j;
+	int		src_px;
+	int		dst_px;
+	int		bpp;
 
 	x *= PX;
 	y *= PX;
+	bpp = data->canva->s_bpp / 8;
 	j = -1;
 	while (++j < PX)
 	{
 		i = -1;
 		while (++i < PX)
 		{
-			
+			src_px = j * data->canva->s_size_line + i * bpp;
+			dst_px = (y + j) * data->canva->i_size_line + (x + i) * bpp;
+			b = -1;
+			while (++b < bpp)
+				data->canva->i_px[dst_px + b] = data->canva->s_px[src_px + b];
 		}
 	}
 }

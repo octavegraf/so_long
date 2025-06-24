@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:25:58 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/23 12:43:12 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/24 15:37:04 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ typedef struct s_data
 	int			collectibles;
 	void		*mlx;
 	void		*win;
-	void		*img1;
-	void		*img2;
 	t_sprites	*frame_1;
 	t_sprites	*frame_2;
 	t_canva		*canva;
@@ -99,7 +97,7 @@ typedef struct s_data
 void		fill_background(t_data *data, void *background);
 char		get_element_by_position(t_data *data, int x, int y);
 t_sprites	*init_sprites(t_data *data);
-void		place_image(t_data *data, int x, int y);
+void		place_image(t_data *data, int x, int y, int bytes);
 void		draw(t_data *data, t_sprites *sprites, int x, int y);
 void		get_sprite_addr(t_data *data, t_sprites *sprites, char c);
 void		get_canva_addr(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 12:15:55 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/23 14:38:22 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/24 15:48:00 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	detect_player(t_data *data)
 			{
 				data->x = x;
 				data->y = y;
+				data->map[y][x] = '0';
 				return ;
 			}
 			x++;
@@ -60,14 +61,19 @@ t_data	*so_long_init(char *map_path)
 	data->map = get_map(map_path);
 	detect_player(data);
 	data->moves = 0;
-	data->collectibles = check_map_components(data->map);
+	data->collectibles = collectibles_left(data->map);
 	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, 13 * PX, 9 * PX, "so_long");
+	if (!data->mlx)
+	{
+		ft_printf("Error : Can't initialize mlx.");
+		return_error(134, data);
+	}
 	data->frame_1 = init_sprites(data);
 	data->frame_2 = init_sprites(data);
 	init_sprites_frames_1(data);
 	init_sprites_frames_2(data);
 	data->canva = init_canva(data);
+	data->win = mlx_new_window(data->mlx, 13 * PX, 9 * PX, "so_long");
 	return (data);
 }
 

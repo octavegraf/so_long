@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 12:20:48 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/18 14:24:26 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/24 14:48:39 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,11 @@ void	return_error(int error, t_data *data)
 	errno = error;
 	if (error <= 132)
 		perror("Error");
-	if (data->canva)
+	if (data)
 	{
-		if (data->canva->img)
-			mlx_destroy_image(data->mlx, data->canva->img);
-		free(data->canva);
+		clear_everything(data);
+		free(data);
 	}
-	clear_everything(data);
 	exit(EXIT_FAILURE);
 }
 
@@ -55,8 +53,11 @@ void	free_it(char **this)
 
 void	leave(t_data *data)
 {
-	mlx_destroy_window(data->mlx, data->win);
-	free_it(data->map);
+	if (data)
+	{
+		clear_everything(data);
+		free(data);
+	}
 	ft_printf("Thank you for playing the game. See you soon :)\n");
 	exit(EXIT_SUCCESS);
 }
@@ -77,11 +78,14 @@ void	clear_everything(t_data *data)
 	}
 	if (data && data->win)
 		mlx_destroy_window(data->mlx, data->win);
+	if (data && data->canva)
+	{
+		mlx_destroy_image(data->mlx, data->canva->img);
+		free(data->canva);
+	}
 	if (data && data->mlx)
 	{
 		mlx_destroy_display(data->mlx);
 		free(data->mlx);
 	}
-	if (data)
-		free(data);
 }
