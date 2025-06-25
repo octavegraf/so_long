@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:25:58 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/24 15:37:04 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/25 15:15:48 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ int			move_right(t_data *data);
 int			collectibles_left(char **map);
 void		update_map(t_data *data);
 int			keyboard_events(int key, void *data);
+int			cross_button(void *void_data);
 
 int			file_checker(const char *path, t_data *data);
 void		detect_player(t_data *data);
@@ -129,8 +130,8 @@ int			check_map_components(char	**map);
 int			check_map_chars(char	**map);
 int			check_map(char **map);
 
-char		**map_to_memory(const char *path);
-char		**get_map(const char *path);
+char		**map_to_memory(t_data *data, const char *path);
+char		**get_map(t_data *data, const char *path);
 
 void		return_error(int error, t_data *data);
 void		free_sprites(t_data *data, t_sprites *sprites);

@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 12:15:55 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/24 15:48:00 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/25 17:28:58 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,15 @@ t_data	*so_long_init(char *map_path)
 
 	data = malloc(sizeof(t_data));
 	if (!data)
-	{
-		ft_printf("Error : Can't initialize data.");
-		return_error(134, data);
-	}
-	data->map = get_map(map_path);
+		return_error(135, data);
+	data->map = get_map(data, map_path);
 	detect_player(data);
 	data->moves = 0;
 	data->collectibles = collectibles_left(data->map);
 	data->mlx = mlx_init();
 	if (!data->mlx)
-	{
-		ft_printf("Error : Can't initialize mlx.");
-		return_error(134, data);
-	}
+		return_error(136, data);
+	// map_gameplay(data);
 	data->frame_1 = init_sprites(data);
 	data->frame_2 = init_sprites(data);
 	init_sprites_frames_1(data);

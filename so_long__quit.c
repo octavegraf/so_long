@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 12:20:48 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/24 14:48:39 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/25 17:29:21 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,18 @@ void	return_error(int error, t_data *data)
 		clear_everything(data);
 		free(data);
 	}
+	if (error == 134)
+		ft_printf("Error: Can't initialize MLX.");
+	if (error == 136)
+		ft_printf("Error : Can't initialize data.");
+
 	exit(EXIT_FAILURE);
 }
 
 void	free_sprites(t_data *data, t_sprites *sprites)
 {
+	if (!sprites || !data || !data->mlx)
+		return ;
 	if (sprites->background)
 		mlx_destroy_image(data->mlx, sprites->background);
 	if (sprites->empty)
@@ -89,3 +96,4 @@ void	clear_everything(t_data *data)
 		free(data->mlx);
 	}
 }
+

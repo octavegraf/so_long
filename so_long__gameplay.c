@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 20:15:27 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/24 13:40:44 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/25 15:38:35 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,21 @@ int	keyboard_events(int key, void *data)
 		response = move_left(gameplay);
 	else if (key == KEY_D || key == KEY_RIGHT)
 		response = move_right(gameplay);
-	else if (key == KEY_ESC)
+	else if (key == KEY_ESC || key == 17)
 		leave(data);
 	if (response)
 	{
 		gameplay->moves += 1;
 		update_map(gameplay);
 	}
+	return (0);
+}
+
+int	cross_button(void *void_data)
+{
+	t_data	*data;
+
+	data = (t_data *)void_data;
+	leave(data);
 	return (0);
 }

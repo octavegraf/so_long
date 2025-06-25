@@ -6,27 +6,27 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:31:28 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/22 17:23:41 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/25 12:36:33 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char	**map_to_memory(const char *path)
+char	**map_to_memory(t_data *data, const char *path)
 {
 	char	**map;
 	char	*temp;
 	char	*line;
 	int		file;
 
-	file = file_checker(path, NULL);
+	file = file_checker(path, data);
 	map = NULL;
 	temp = gnl_skip_whitespaces(file);
 	while (temp && *temp)
 	{
 		line = ft_strtrim(temp, " \n\t\v\f\r");
 		free(temp);
-		if (*line)
+		if (line && *line)
 			ft_tab_add_row(&map, line);
 		free(line);
 		temp = get_next_line(file);
@@ -36,11 +36,11 @@ char	**map_to_memory(const char *path)
 	return (map);
 }
 
-char	**get_map(const char *path)
+char	**get_map(t_data *data, const char *path)
 {
 	char	**map;
 
-	map = map_to_memory(path);
+	map = map_to_memory(data, path);
 	if (!map)
 		return (ft_printf("%s", "Error: Can't create map"),
 			return_error(133, NULL), NULL);
