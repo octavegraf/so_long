@@ -6,19 +6,24 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 12:15:55 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/25 17:28:58 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/26 16:36:46 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	file_checker(const char *path, t_data *data)
+	int	file_checker(const char *path, t_data *data, int to_close)
 {
 	int	file;
 
 	file = open(path, O_RDONLY);
 	if (file <= 0)
 		return_error(2, data);
+	else if (to_close)
+	{
+		close(file);
+		return (1);
+	}
 	else
 		return (file);
 	return (0);
@@ -49,7 +54,7 @@ void	detect_player(t_data *data)
 }
 
 t_data	*so_long_init(char *map_path)
-{
+{	
 	t_data	*data;
 
 	data = malloc(sizeof(t_data));
@@ -58,17 +63,20 @@ t_data	*so_long_init(char *map_path)
 	data->map = get_map(data, map_path);
 	detect_player(data);
 	data->moves = 0;
+	data->itoa_moves = malloc(sizeof(char *));
+	if (!data->itoa_moves)
+		return_error(136, data);
 	data->collectibles = collectibles_left(data->map);
 	data->mlx = mlx_init();
 	if (!data->mlx)
 		return_error(136, data);
-	// map_gameplay(data);
 	data->frame_1 = init_sprites(data);
 	data->frame_2 = init_sprites(data);
 	init_sprites_frames_1(data);
 	init_sprites_frames_2(data);
 	data->canva = init_canva(data);
 	data->win = mlx_new_window(data->mlx, 13 * PX, 9 * PX, "so_long");
+	map_gameplay(data);
 	return (data);
 }
 

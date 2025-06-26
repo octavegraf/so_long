@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:25:58 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/25 15:15:48 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/26 16:43:37 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,11 @@ typedef struct s_canva
 typedef struct s_data
 {
 	char		**map;
+	int			fd[16];
 	int			x;
 	int			y;
 	int			moves;
+	char		*itoa_moves;
 	int			collectibles;
 	void		*mlx;
 	void		*win;
@@ -120,7 +122,7 @@ void		update_map(t_data *data);
 int			keyboard_events(int key, void *data);
 int			cross_button(void *void_data);
 
-int			file_checker(const char *path, t_data *data);
+int			file_checker(const char *path, t_data *data, int to_close);
 void		detect_player(t_data *data);
 t_data		*so_long_init(char *map_path);
 
@@ -132,6 +134,12 @@ int			check_map(char **map);
 
 char		**map_to_memory(t_data *data, const char *path);
 char		**get_map(t_data *data, const char *path);
+
+char		**map_copy(char **map);
+void		map_filler(char **map, int x, int y);
+int			map_path_checker(char **map);
+void		map_gameplay(t_data *data);
+
 
 void		return_error(int error, t_data *data);
 void		free_sprites(t_data *data, t_sprites *sprites);
