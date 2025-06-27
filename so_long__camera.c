@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:28:26 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/24 15:52:54 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/27 12:25:15 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,8 @@ void	place_image(t_data *data, int x, int y, int b)
 		{
 			src_px = j * data->canva->s_size_line + i * bpp;
 			dst_px = (y + j) * data->canva->i_size_line + (x + i) * bpp;
+			if (data->canva->s_px[src_px] == 0)
+				continue ;
 			b = -1;
 			while (++b < bpp)
 				data->canva->i_px[dst_px + b] = data->canva->s_px[src_px + b];
