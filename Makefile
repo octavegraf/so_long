@@ -17,7 +17,10 @@ MLX_LIB		=	$(MLX_FOLDER)libmlx.a
 LX11_LINUX	=	-lX11 -lXext -lm
 LIBS		=	$(LX11_MAC) $(LX11_LINUX) $(MLX_LIB) $(PF_LIB) $(GNL_LIB)
 
-SRC			=	$(wildcard *.c)
+SRC			=	debug.c so_long.c so_long__camera.c so_long__frames.c \
+				so_long__gameplay.c so_long__gameplay_moves.c so_long__init.c \
+				so_long__map_checker.c so_long__map_get.c \
+				so_long__path_checker.c so_long__quit.c
 OBJ			=	$(SRC:.c=.o)
 
 all			:	submodules $(NAME)
