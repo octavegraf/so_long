@@ -6,13 +6,13 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 12:15:55 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/26 16:36:46 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/27 12:22:55 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-	int	file_checker(const char *path, t_data *data, int to_close)
+int	file_checker(const char *path, t_data *data, int to_close)
 {
 	int	file;
 
@@ -54,16 +54,16 @@ void	detect_player(t_data *data)
 }
 
 t_data	*so_long_init(char *map_path)
-{	
+{
 	t_data	*data;
 
-	data = malloc(sizeof(t_data));
+	data = (t_data *)ft_calloc(1, sizeof(t_data));
 	if (!data)
 		return_error(135, data);
+	null_init(data);
 	data->map = get_map(data, map_path);
 	detect_player(data);
-	data->moves = 0;
-	data->itoa_moves = malloc(sizeof(char *));
+	data->itoa_moves = (char *)ft_calloc(sizeof(char *), 1);
 	if (!data->itoa_moves)
 		return_error(136, data);
 	data->collectibles = collectibles_left(data->map);
@@ -84,7 +84,7 @@ t_sprites	*init_sprites(t_data *data)
 {
 	t_sprites	*sprites;
 
-	sprites = malloc(sizeof(t_sprites));
+	sprites = (t_sprites *)ft_calloc(1, sizeof(t_sprites));
 	if (!sprites)
 	{
 		ft_printf("Error : Can't initialize sprites.");
@@ -97,19 +97,12 @@ t_canva	*init_canva(t_data *data)
 {
 	t_canva	*canva;
 
-	canva = malloc(sizeof(t_canva));
+	canva = (t_canva *)ft_calloc(1, sizeof(t_canva));
 	if (!canva)
 	{
 		ft_printf("Error : Can't initialize canva.");
 		return_error(134, data);
 	}
 	canva->img = mlx_new_image(data->mlx, 13 * PX, 9 * PX);
-	canva->i_bpp = 0;
-	canva->i_size_line = 0;
-	canva->i_endian = 0;
-	canva->sprite = NULL;
-	canva->s_bpp = 0;
-	canva->s_size_line = 0;
-	canva->s_endian = 0;
 	return (canva);
 }

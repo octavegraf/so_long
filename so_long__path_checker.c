@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:38:54 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/26 11:03:58 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/27 12:03:07 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**map_copy(char **map)
 	i = 0;
 	while (map[i])
 		i++;
-	copy = malloc(sizeof(char *) * (i + 1));
+	copy = (char **)ft_calloc(i + 1, sizeof(char *));
 	if (!copy)
 		return (NULL);
 	i = -1;
