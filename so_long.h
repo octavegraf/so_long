@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:25:58 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/26 16:43:37 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/27 11:20:12 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,5 +146,8 @@ void		free_sprites(t_data *data, t_sprites *sprites);
 void		free_it(char **this);
 void		leave(t_data *data);
 void		clear_everything(t_data *data);
+void		null_init(t_data *data);
+
+
 
 #endif
