@@ -6,15 +6,42 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 12:04:57 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/12 12:31:29 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/06/27 11:03:46 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// int main(int argc, char **argv)
-// {
-// 	char **x = get_map("map_test");
-// 	(void)x;
-// 	return 0;
-// }
+void	null_init(t_data *data)
+{
+	data->map = NULL;
+	data->x = 0;
+	data->y = 0;
+	data->moves = 0;
+	data->itoa_moves = NULL;
+	data->collectibles = 0;
+	data->mlx = NULL;
+	data->win = NULL;
+	data->frame_1 = NULL;
+	data->frame_2 = NULL;
+	data->canva = NULL;
+}
+
+int	main(int argc, char **argv)
+{
+	t_data	*data;
+
+	data = NULL;
+	if (argc == 2)
+	{
+		data = so_long_init(argv[1]);
+		mlx_hook(data->win, 17, 0, cross_button, data);
+		mlx_key_hook(data->win, keyboard_events, data);
+		mlx_loop_hook(data->mlx, frames, data);
+		mlx_loop(data->mlx);
+	}
+	else
+		ft_printf("You need to give the map path in argument."
+			" Only 1 can be received.");
+	return (0);
+}
