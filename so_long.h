@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 14:25:58 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/27 11:20:12 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/07/01 14:22:46 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct s_data
 #  define KEY_DOWN 65364
 #  define KEY_LEFT 65361
 #  define KEY_RIGHT 65363
+
 # elif __APPLE__
 #  define KEY_ESC 53
 #  define KEY_W 119
@@ -128,8 +129,8 @@ t_data		*so_long_init(char *map_path);
 
 char		*gnl_skip_whitespaces(int fd);
 int			different_char(char *str);
-int			check_map_components(char	**map);
-int			check_map_chars(char	**map);
+int			check_map_components(char **map, int i);
+int			check_map_chars(char **map);
 int			check_map(char **map);
 
 char		**map_to_memory(t_data *data, const char *path);
@@ -140,14 +141,11 @@ void		map_filler(char **map, int x, int y);
 int			map_path_checker(char **map);
 void		map_gameplay(t_data *data);
 
-
 void		return_error(int error, t_data *data);
 void		free_sprites(t_data *data, t_sprites *sprites);
 void		free_it(char **this);
 void		leave(t_data *data);
 void		clear_everything(t_data *data);
 void		null_init(t_data *data);
-
-
 
 #endif
