@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 12:20:48 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/27 10:39:52 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/07/01 14:24:00 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	return_error(int error, t_data *data)
 	if (error <= 132)
 		perror("Error");
 	if (error == 134)
-		ft_printf("Error: Can't initialize MLX.");
+		ft_printf("Error: Can't initialize MLX.\n");
 	if (error == 136)
-		ft_printf("Error : Can't initialize data.");
+		ft_printf("Error : Can't initialize data.\n");
 	if (data && data->itoa_moves)
 		free(data->itoa_moves);
 	if (data)
@@ -99,4 +99,3 @@ void	clear_everything(t_data *data)
 		free(data->mlx);
 	}
 }
-
