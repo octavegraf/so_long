@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:31:28 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/14 15:40:13 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/07/01 14:22:55 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ int	different_char(char *str)
 	return (0);
 }
 
-int	check_map_components(char	**map)
+int	check_map_components(char	**map, int i)
 {
-	int	i;
+	int	j;
 	int	c;
 	int	e;
 	int	p;
@@ -57,17 +57,20 @@ int	check_map_components(char	**map)
 	c = 0;
 	while (map[++i])
 	{
-		if (ft_strrchr(map[i], 'C'))
-			c++;
-		if (ft_strrchr(map[i], 'E'))
-			e++;
-		if (ft_strrchr(map[i], 'P'))
-			p++;
+		j = -1;
+		while (map[i][++j])
+		{
+			if (map[i][j] == 'C')
+				c++;
+			else if (map[i][j] == 'E')
+				e++;
+			else if (map[i][j] == 'P')
+				p++;
+		}
 	}
 	if (c < 1 || e != 1 || p != 1)
 		return (1);
-	else
-		return (0);
+	return (0);
 }
 
 int	check_map_chars(char	**map)
@@ -107,7 +110,7 @@ int	check_map(char **map)
 			error++;
 	}
 	error += different_char(map[--i]);
-	error += check_map_components(map);
+	error += check_map_components(map, 0);
 	error += check_map_chars(map);
 	return (error);
 }
