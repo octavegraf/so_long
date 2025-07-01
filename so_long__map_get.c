@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:31:28 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/26 16:53:45 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/07/01 14:23:29 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ char	**get_map(t_data *data, const char *path)
 
 	map = map_to_memory(data, path);
 	if (!map)
-		return (ft_printf("%s", "Error: Can't create map"),
+		return (ft_printf("%s", "Error: Can't create map\n"),
 			return_error(133, data), NULL);
 	if (check_map(map))
 	{
 		free_it(map);
 		return (ft_printf("%s", "Error: Invalid map. A map must contain 1 exit,"
 				" 1 starting position, at least 1 collectible and be surrounded"
-				" by walls."), return_error(134, data), NULL);
+				" by walls.\n"), return_error(134, data), NULL);
 	}
 	return (map);
 }
