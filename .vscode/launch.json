@@ -6,7 +6,7 @@
       "type": "lldb",
       "request": "launch",
       "program": "${workspaceFolder}/debug",
-      "args": [],
+      "args": ["map_test"],
       "cwd": "${workspaceFolder}",
       "stopOnEntry": false,
       "preLaunchTask": "build",
