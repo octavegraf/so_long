@@ -6,35 +6,38 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:31:28 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/07/08 13:48:20 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/07/08 16:54:28 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+
 char	**map_to_memory(t_data *data, const char *path)
 {
 	char	**map;
-	char	*temp;
 	char	*line;
+	char	*temp;
 	int		file;
 
 	file = file_checker(path, data, 0);
 	map = NULL;
-	temp = gnl_skip_whitespaces(file);
-	while (temp && *temp)
+	line = get_next_line(file);
+	while (line && *line)
 	{
-		line = ft_strtrim(temp, " \n\t\v\f\r");
-		if (!line)
-			return_error(140, map);
-		free(temp);
-		if (line && *line)
-			map = ft_array_add_row(map, line);
+		temp = ft_strtrim(line, "\n");
+		if (!temp)
+			return (free_it(map), free(line), return_error(140, data), NULL);
+		map = ft_array_add_row(map, temp);
+		if (!map)
+			return (free_it(map), free(line), free(temp),
+				return_error(140, data), NULL);
 		free(line);
-		temp = get_next_line(file);
-	}
-	if (temp)
 		free(temp);
+		line = get_next_line(file);
+	}
+	if (line)
+		free(line);
 	close(file);
 	return (map);
 }

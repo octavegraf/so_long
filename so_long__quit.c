@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 12:20:48 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/07/01 14:24:00 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/07/08 16:53:43 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ void	free_it(char **this)
 	int	i;
 
 	i = -1;
-	while (this[++i])
+	if (!this)
+		return ;
+	while (this && this[++i])
 		free(this[i]);
 	free(this);
 }
