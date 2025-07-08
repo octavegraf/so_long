@@ -6,7 +6,7 @@
       "type": "lldb",
       "request": "launch",
       "program": "${workspaceFolder}/debug",
-      "args": ["map_test"],
+      "args": ["maps/valid.ber"],
       "cwd": "${workspaceFolder}",
       "stopOnEntry": false,
       "preLaunchTask": "build",
