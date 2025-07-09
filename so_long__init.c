@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 12:15:55 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/27 12:22:55 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/07/09 18:32:19 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ t_data	*so_long_init(char *map_path)
 	init_sprites_frames_2(data);
 	data->canva = init_canva(data);
 	data->win = mlx_new_window(data->mlx, 13 * PX, 9 * PX, "so_long");
+	if (!data->canva || !data->win)
+		return_error(136, data);
 	map_gameplay(data);
 	return (data);
 }
@@ -104,5 +106,7 @@ t_canva	*init_canva(t_data *data)
 		return_error(134, data);
 	}
 	canva->img = mlx_new_image(data->mlx, 13 * PX, 9 * PX);
+	if (!canva->img)
+		return (NULL);
 	return (canva);
 }
