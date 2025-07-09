@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 12:20:48 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/07/08 16:53:43 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/07/09 17:09:14 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	leave(t_data *data)
 
 void	clear_everything(t_data *data)
 {
+	get_next_line(-1);
 	if (data && data->map)
 		free_it(data->map);
 	if (data && data->frame_1)
@@ -100,5 +101,4 @@ void	clear_everything(t_data *data)
 		mlx_destroy_display(data->mlx);
 		free(data->mlx);
 	}
-	get_next_line(-1);
 }

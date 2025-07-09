@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 15:31:28 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/07/09 16:20:15 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/07/09 17:12:08 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	**map_to_memory(t_data *data, const char *path)
 		if (!temp)
 			return (free_it(map), free(line), return_error(140, data), NULL);
 		map = ft_array_add_row(map, temp);
-		if (!map)
+		if (map)
 			return (free(line), free(temp), free_it(map),
 				return_error(140, data), NULL);
 		free(line);
