@@ -100,4 +100,5 @@ void	clear_everything(t_data *data)
 		mlx_destroy_display(data->mlx);
 		free(data->mlx);
 	}
+	get_next_line(-1);
 }
