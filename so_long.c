@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 12:04:57 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/07/10 16:04:00 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/07/10 16:20:23 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ int	main(int argc, char **argv)
 	}
 	else
 		ft_printf("Error\nYou need to give the map path in .ber in argument."
-			" Only 1 can be received.");
+			" Only 1 can be received.\n");
 	return (0);
 }

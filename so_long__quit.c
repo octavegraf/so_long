@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 12:20:48 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/07/10 16:03:25 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/07/10 16:13:51 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	return_error(int error, t_data *data)
 {
 	errno = error;
 	if (error <= 132)
-		perror("Error\n");
+		perror("Error");
 	if (error == 134)
 		ft_printf("Error\nCan't initialize MLX.\n");
 	if (error == 136)
