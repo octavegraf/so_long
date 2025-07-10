@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 12:04:57 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/06/27 11:03:46 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/07/10 16:04:00 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int	main(int argc, char **argv)
 	t_data	*data;
 
 	data = NULL;
-	if (argc == 2)
+	if (argc == 2 && (!ft_strncmp(argv[1] + (ft_strlen(argv[1]) - 4),
+				".ber", 4)))
 	{
 		data = so_long_init(argv[1]);
 		mlx_hook(data->win, 17, 0, cross_button, data);
@@ -41,7 +42,7 @@ int	main(int argc, char **argv)
 		mlx_loop(data->mlx);
 	}
 	else
-		ft_printf("You need to give the map path in argument."
+		ft_printf("Error\nYou need to give the map path in .ber in argument."
 			" Only 1 can be received.");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:38:54 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/07/09 18:35:48 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/07/10 16:03:08 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	map_gameplay(t_data *data)
 	map_filler(map_cpy, data->x, data->y);
 	if (map_path_checker(map_cpy))
 	{
-		ft_printf("%s", "Error: The level can't be played because a collectible"
+		ft_printf("%s", "Error\nThe level can't be played because a collectible"
 			" or exit is surrounded by walls.\n");
 		free_it(map_cpy);
 		return_error(133, data);

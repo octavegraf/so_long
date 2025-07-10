@@ -6,7 +6,7 @@
 /*   By: ocgraf <ocgraf@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 12:15:55 by ocgraf            #+#    #+#             */
-/*   Updated: 2025/07/09 18:32:19 by ocgraf           ###   ########.fr       */
+/*   Updated: 2025/07/10 16:02:49 by ocgraf           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_sprites	*init_sprites(t_data *data)
 	sprites = (t_sprites *)ft_calloc(1, sizeof(t_sprites));
 	if (!sprites)
 	{
-		ft_printf("Error : Can't initialize sprites.");
+		ft_printf("Error\nCan't initialize sprites.");
 		return_error(134, data);
 	}
 	return (sprites);
@@ -102,7 +102,7 @@ t_canva	*init_canva(t_data *data)
 	canva = (t_canva *)ft_calloc(1, sizeof(t_canva));
 	if (!canva)
 	{
-		ft_printf("Error : Can't initialize canva.");
+		ft_printf("Error\nCan't initialize canva.");
 		return_error(134, data);
 	}
 	canva->img = mlx_new_image(data->mlx, 13 * PX, 9 * PX);
