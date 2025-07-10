@@ -43,6 +43,7 @@ clean		:
 	@$(MAKE) -C $(GNL_FOLDER) clean
 	@$(MAKE) -C $(PF_FOLDER) clean
 	@$(MAKE) -C $(MLX_FOLDER) clean
+	@$(MAKE) -C $(LFT_FOLDER) clean
 
 fclean		: clean
 	@rm -f $(NAME) $(DEBUG_EXEC) $(GNL_LIB) $(PF_LIB) $(LFT_LIB) $(MLX_LIB)
